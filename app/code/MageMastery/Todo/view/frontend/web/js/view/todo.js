@@ -7,7 +7,6 @@ define(['uiComponent'], function(Component) {
                 {label: "Task 2"},
                 {label: "Task 3"},
                 {label: "Task 4"},
-                {label: "Task 5"},
             ]
         },
         initObservable: function() {
@@ -17,7 +16,7 @@ define(['uiComponent'], function(Component) {
 
             this.tasks.push(
                 {
-                    label: "Task 6"
+                    label: "Task 5"
                 }
             );
 
