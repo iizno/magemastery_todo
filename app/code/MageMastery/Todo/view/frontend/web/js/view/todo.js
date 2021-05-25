@@ -6,6 +6,8 @@
     'use strict';
     return Component.extend({
         defaults: {
+            button_selector: '#add-new-task-button',
+            new_task_label: 'Something todo !',
             tasks: [
                 {id: 1, label: "Task 1", status: false},
                 {id: 2, label: "Task 2", status: false},
@@ -15,7 +17,8 @@
         },
         initObservable: function() {
             this._super().observe([
-                'tasks'
+                'tasks',
+                'new_task_label'
             ]);
             return this;
         },
@@ -31,7 +34,6 @@
 
             return this.tasks(items);
         },
-
         deleteTask: function (task_id) {
 
             var self = this;
@@ -57,6 +59,22 @@
                    }
                }
             });
-        }
+        },
+        addTask: function() {
+            this.tasks.push(
+                {
+                    id: Math.floor(Math.random() * 100),
+                    label: this.new_task_label(),
+                    status: false
+                }
+            )
+            this.new_task_label('');
+        },
+        checkKey: function(data, event) {
+            if(event.keyCode === 13) {
+                event.preventDefault();
+                $(this.button_selector).click();
+            }
+        },
     });
 });
