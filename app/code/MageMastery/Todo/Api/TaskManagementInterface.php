@@ -1,12 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageMastery\Todo\Api;
+
+use MageMastery\Todo\Api\Data\TaskInterface;
 
 /**
  * @api
  */
 interface TaskManagementInterface
 {
-    public function save();
-    public function delete();
+    /**
+     * @param  TaskInterface  $task
+     * @return int
+     */
+    public function save(TaskInterface $task) : int;
+
+    /**
+     * @param  TaskInterface  $task
+     * @return bool
+     */
+    public function delete(TaskInterface $task) : bool;
 }

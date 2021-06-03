@@ -18,23 +18,29 @@
 </div>
 
 <!-- ko if: ($data.tasks) -->
+<h3>My Tasks</h3>
 <ul class="tasks">
     <li repeat="foreach: tasks, item: 'task'">
         <a data-bind="
             attr: {
-                class: 'status ' + (task().status ? 'complete' : 'open'),
-                'data-id': task().id
+                class: 'status ' + (task().status === 'complete' ? 'complete' : 'open'),
+                'data-id': task().task_id
             },
             click: switchStatus,
 
-        "></a>
-        <span class="label" data-bind="text: task().label" />
+        " translate="task().label"></a>
         <a class="action delete" data-bind="
             attr: {
-                'data-id': task().id
+                'data-id': task().task_id
             },
-            click: deleteTask.bind($data, task().id)
+            click: deleteTask.bind($data, task().task_id)
         ">Delete</a>
     </li>
 </ul>
+<!-- /ko -->
+
+<!-- ko if: (tasks().length == 0) -->
+<div class="message info empty">
+    <span>There are no open tasks</span>
+</div>
 <!-- /ko -->
