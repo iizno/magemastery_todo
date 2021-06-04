@@ -28,23 +28,27 @@ class TaskManagement implements TaskManagementInterface
     }
 
     /**
+     * @param  int            $customerId
      * @param  TaskInterface  $task
      * @return int
      * @throws AlreadyExistsException
      */
-    public function save(TaskInterface $task): int
+    public function save(int $customerId, TaskInterface $task): int
     {
+        $task->setData('customer_id', $customerId);
         $this->resource->save($task);
         return $task->getTaskId();
     }
 
     /**
+     * @param  int            $customerId
      * @param  TaskInterface  $task
      * @return bool
      * @throws \Exception
      */
-    public function delete(TaskInterface $task): bool
+    public function delete(int $customerId, TaskInterface $task): bool
     {
+        $task->setData('customer_id', $customerId);
         $this->resource->delete($task);
         return true;
     }

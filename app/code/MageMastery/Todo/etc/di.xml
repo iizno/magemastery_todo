@@ -8,4 +8,12 @@
     <preference for="MageMastery\Todo\Api\Data\TaskSearchResultInterface" type="MageMastery\Todo\Model\ResourceModel\Task\Collection" />
     <preference for="MageMastery\Todo\Api\CustomerTaskListInterface" type="MageMastery\Todo\Service\CustomerTaskList" />
     <preference for="MageMastery\Todo\Api\TaskStatusManagementInterface" type="MageMastery\Todo\Service\TaskStatusManagement" />
+
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="mageMasteryTodoTaskList" xsi:type="object">MageMastery\Todo\Command\ListTaskCommand</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

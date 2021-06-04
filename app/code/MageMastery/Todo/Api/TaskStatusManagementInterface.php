@@ -9,11 +9,12 @@ namespace MageMastery\Todo\Api;
 interface TaskStatusManagementInterface
 {
     /**
+     * @param  int     $customerId
      * @param  int     $taskId
      * @param  string  $status
      * @return bool
      */
-    public function change(int $taskId, string $status): bool;
+    public function change(int $customerId, int $taskId, string $status): bool;
 
     /**
      * @return mixed

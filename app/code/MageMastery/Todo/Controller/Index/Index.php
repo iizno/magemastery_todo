@@ -1,19 +1,13 @@
 <?php
-
+declare(strict_types=1);
 
 namespace MageMastery\Todo\Controller\Index;
 
-
-use MageMastery\Todo\Api\TaskManagementInterface;
-use MageMastery\Todo\Service\TaskRepository;
-
-use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Customer\Model\Session;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
+use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\ResultFactory;
-use MageMastery\Todo\Model\Task;
-use MageMastery\Todo\Model\ResourceModel\Task as TaskResource;
-use MageMastery\Todo\Model\TaskFactory;
 
 /**
  * Class Index
@@ -22,61 +16,33 @@ use MageMastery\Todo\Model\TaskFactory;
 class Index extends Action
 {
     /**
-     * @var TaskResource
+     * @var Session
      */
-    private $task_resource;
-
-    /**
-     * @var TaskFactory
-     */
-    private $task_factory;
-
-    /**
-     * @var TaskRepository
-     */
-    private $task_repository;
-
-    /**
-     * @var SearchCriteriaBuilder
-     */
-    private $searchCriteria;
-
-    /**
-     * @var TaskManagementInterface
-     */
-    private $taskManagement;
+    private         $session;
 
     /**
      * Index constructor.
-     * @param  Context                  $context
-     * @param  TaskFactory              $task_factory
-     * @param  TaskResource             $task_resource
-     * @param  TaskRepository           $task_repository
-     * @param  SearchCriteriaBuilder    $searchCriteria
-     * @param  TaskManagementInterface  $taskManagement
+     * @param  Context  $context
+     * @param  Session  $session
      */
-    public function __construct(
-        Context $context,
-        TaskFactory $task_factory,
-        TaskResource $task_resource,
-        TaskRepository $task_repository,
-        SearchCriteriaBuilder $searchCriteria,
-        TaskManagementInterface $taskManagement
-    ) {
-        $this->task_resource = $task_resource;
-        $this->task_factory  = $task_factory;
-        $this->task_repository  = $task_repository;
-        $this->searchCriteria  = $searchCriteria;
-        $this->taskManagement  = $taskManagement;
-
+    public function __construct(Context $context, Session $session)
+    {
+        $this->session = $session;
         parent::__construct($context);
     }
 
-    /**
-     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|\Magento\Framework\View\Result\Page|void
-     */
     public function execute()
     {
+        if(!$this->session->isLoggedIn()) {
+
+            /** @var Redirect $redirection */
+            $redirection = $this->resultFactory->create(
+                ResultFactory::TYPE_REDIRECT
+            );
+            $redirection->setPath('customer/account/login');
+            return $redirection;
+        }
+
         return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
     }
 }

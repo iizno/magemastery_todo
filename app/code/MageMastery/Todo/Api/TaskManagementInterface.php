@@ -12,14 +12,16 @@ use MageMastery\Todo\Api\Data\TaskInterface;
 interface TaskManagementInterface
 {
     /**
+     * @param  int            $customerId
      * @param  TaskInterface  $task
      * @return int
      */
-    public function save(TaskInterface $task) : int;
+    public function save(int $customerId, TaskInterface $task) : int;
 
     /**
+     * @param  int            $customerId
      * @param  TaskInterface  $task
      * @return bool
      */
-    public function delete(TaskInterface $task) : bool;
+    public function delete(int $customerId, TaskInterface $task) : bool;
 }

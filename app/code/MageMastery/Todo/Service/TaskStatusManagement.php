@@ -34,11 +34,12 @@ class TaskStatusManagement implements TaskStatusManagementInterface
     }
 
     /**
+     * @param  int     $customerId
      * @param  int     $taskId
      * @param  string  $status
      * @return bool
      */
-    public function change(int $taskId, string $status): bool
+    public function change(int $customerId, int $taskId, string $status): bool
     {
         if(!in_array($status, ['open', 'complete'])) {
             return false;
@@ -47,7 +48,7 @@ class TaskStatusManagement implements TaskStatusManagementInterface
         $task = $this->repository->get($taskId);
         $task->setData(Task::TASK_STATUS, $status);
 
-        $this->taskManagement->save($task);
+        $this->taskManagement->save($customerId, $task);
         return true;
     }
 

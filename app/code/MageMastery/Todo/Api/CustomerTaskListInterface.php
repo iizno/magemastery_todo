@@ -8,7 +8,8 @@ use MageMastery\Todo\Api\Data\TaskInterface;
 interface CustomerTaskListInterface
 {
     /**
+     * @param  int  $customerId
      * @return TaskInterface[];
      */
-    public function getList();
+    public function getList(int $customerId);
 }
