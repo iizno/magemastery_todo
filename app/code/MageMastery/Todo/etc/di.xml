@@ -16,4 +16,20 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="todo_task_listing_data_source" xsi:type="string">TodoTaskSearchResult</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="TodoTaskSearchResult" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magemastery_todo_task</argument>
+            <argument name="resourceModel" xsi:type="string">MageMastery\Todo\Model\ResourceModel\Task</argument>
+            <argument name="identifierName" xsi:type="string">task_id</argument>
+        </arguments>
+    </virtualType>
 </config>

@@ -20,5 +20,8 @@
                     referenceColumn="entity_id"
                     onDelete="CASCADE"/>
 
+        <index referenceId="TASK_label" indexType="fulltext">
+            <column name="label" />
+        </index>
     </table>
 </schema>

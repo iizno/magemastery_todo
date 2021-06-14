@@ -9,6 +9,9 @@
         "constraint": {
             "PRIMARY": true,
             "MAGEMASTERY_TODO_TASK_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true
+        },
+        "index": {
+            "MAGEMASTERY_TODO_TASK_LABEL": true
         }
     }
 }
